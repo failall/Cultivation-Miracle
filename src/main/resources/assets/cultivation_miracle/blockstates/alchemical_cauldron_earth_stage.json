@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "cultivation_miracle:block/alchemical_cauldron_earth_stage"},
+    "facing=east": { "model": "cultivation_miracle:block/alchemical_cauldron_earth_stage", "y" : 90},
+    "facing=south": { "model": "cultivation_miracle:block/alchemical_cauldron_earth_stage","y" : 180},
+    "facing=west": { "model": "cultivation_miracle:block/alchemical_cauldron_earth_stage", "y" : 270}
+  }
+}

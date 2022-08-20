@@ -1,0 +1,11 @@
+{
+  "block.cultivation_miracle.alchemical_cauldron_earth_stage": "Alchemical Cauldron",
+  "block.cultivation_miracle.primordial_block": "Block of Primordial Ingots",
+  "block.cultivation_miracle.primordial_ore": "Primordial Ore",
+  "block.cultivation_miracle.primordial_ore_deepslate": "Deepslate Primordial Ore",
+  "item.cultivation_miracle.primordial_ingot": "Primordial Ingot",
+  "item.cultivation_miracle.raw_primordial": "Raw Primordial",
+  "itemGroup.cultivation_miracle_tab": "Cultivation Miracle",
+  "key.category.cultivation_miracle": "Cultivation Miracle",
+  "key.cultivation_miracle.cultivate": "Cultivate"
+}
