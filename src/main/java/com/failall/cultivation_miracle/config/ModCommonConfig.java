@@ -8,6 +8,7 @@ public class ModCommonConfig {
 
     public static final ForgeConfigSpec.IntValue MAX_QI_STARTING;
     public static final ForgeConfigSpec.IntValue CULTIVATION_SPEED_STARTING;
+    public static final ForgeConfigSpec.IntValue THRESHOLD_QI_STARTING;
 
     static {
         // Start a category with BUILDER.push() and end with BUILDER.pop()
@@ -16,9 +17,11 @@ public class ModCommonConfig {
         BUILDER.push("Cultivator config options");
         BUILDER.comment("Starting values of the cultivator(player):");
         MAX_QI_STARTING = BUILDER
-                .defineInRange("Maximum qi", 100, 1, 100000);
+                .defineInRange("Maximum Qi", 100, 1, 100000);
         CULTIVATION_SPEED_STARTING = BUILDER
                 .defineInRange("Cultivation Speed", 1 , 1, 100000);
+        THRESHOLD_QI_STARTING = BUILDER
+                .defineInRange("Threshold Qi", 100, 1 + 1, 100001);
         BUILDER.pop();
 
 
