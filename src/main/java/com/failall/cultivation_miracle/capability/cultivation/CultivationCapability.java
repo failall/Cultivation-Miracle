@@ -1,15 +1,16 @@
 package com.failall.cultivation_miracle.capability.cultivation;
 
 import com.failall.cultivation_miracle.CultivationMiracle;
+import com.failall.cultivation_miracle.cultivation.CultivationRealm;
 import com.failall.cultivation_miracle.cultivation.CultivationStage;
 import com.failall.cultivation_miracle.registry.RegistryCultivationRealms;
 import com.failall.cultivation_miracle.registry.RegistryCultivationStages;
 import com.failall.cultivation_miracle.util.CultivationLogicProviders;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CultivationCapability {
@@ -170,11 +171,11 @@ public class CultivationCapability {
         final CultivationStage currentStage = CultivationLogicProviders.getCultivationStageFromRegistry(this.cultivationStage);
 
         if (currentStage.getStageRankingNumber() == 7) {
-            rankUpRealm();
+            // safe check, in case in CultivationCapEvents smth goes wrong
             return;
         }
 
-        RegistryObject<CultivationStage> newStage = CultivationLogicProviders.getStageRegistryObjFromRegistry(currentStage);
+        RegistryObject<CultivationStage> newStage = CultivationLogicProviders.getNewStageRegistryObjFromRegistry(currentStage);
 
         this.cultivationStage = newStage.getId();
         this.maxQi += newStage.get().getMaxQiToAdd();
@@ -183,7 +184,14 @@ public class CultivationCapability {
         this.qi = this.qi / 2;
     }
 
-    public void rankUpRealm() {
+    public void rankUpRealm(Player player) {
+        CultivationRealm currentRealm = CultivationLogicProviders.getCultivationRealmFromRegistry(this.cultivationRealm);
+
+        //TODO safety check for max. realm(peak)
+
+        RegistryObject<CultivationRealm> newRealm = CultivationLogicProviders.getNewRealmRegistryObjFromRegistry(currentRealm);
+
+        this.cultivationRealm = newRealm.getId();
 
     }
 

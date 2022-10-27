@@ -64,4 +64,8 @@ public class CultivationStage {
     public Integer getCultivationSpeedToAdd() {
         return cultivationSpeedToAdd;
     }
+
+    public CultivationRealm getRealm() {
+        return realm;
+    }
 }

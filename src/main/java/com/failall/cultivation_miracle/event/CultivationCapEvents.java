@@ -6,6 +6,7 @@ import com.failall.cultivation_miracle.cultivation.CultivationRealm;
 import com.failall.cultivation_miracle.cultivation.CultivationStage;
 import com.failall.cultivation_miracle.registry.RegistryCultivationRealms;
 import com.failall.cultivation_miracle.registry.RegistryCultivationStages;
+import com.failall.cultivation_miracle.util.CultivationLogicProviders;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -18,6 +19,8 @@ import java.util.NoSuchElementException;
 @Mod.EventBusSubscriber(modid = CultivationMiracle.MOD_ID)
 public class CultivationCapEvents {
 
+    private static int counter = 0;
+
     // If player is cultivating --> increase things and handle reaching limits/etc.
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -25,24 +28,25 @@ public class CultivationCapEvents {
             event.player.getCapability(CultivationProvider.PLAYER_QI).ifPresent(cultivator -> {
                 // Check if threshold QI is reached --> handle rest
                 // Stage section
-                CultivationStage stage = RegistryCultivationStages.DEFERRED_CULTIVATION_STAGES.getEntries().stream().filter(
-                        c -> c.getId() == cultivator.getCultivationStage()
-                ).findFirst().get().orElseThrow(() -> new NoSuchElementException("This cultivation stage does not exist."));
+                CultivationStage stage = CultivationLogicProviders.getCultivationStageFromRegistry(cultivator.getCultivationStage());
 
-                if (cultivator.getMaxQi() >= cultivator.getThresholdQi() && stage.getStageRankingNumber() <= 7) {
+                if (cultivator.getMaxQi() >= cultivator.getThresholdQi() && stage.getStageRankingNumber() < 7) {
                     cultivator.rankUpStage();
                     cultivator.applyAttributeChangesFromStage();
                 }
 
-
-                // Realm section
-                CultivationRealm realm = RegistryCultivationRealms.DEFERRED_CULTIVATION_REALMS.getEntries().stream().filter(
-                        c -> c.getId() == cultivator.getCultivationRealm()
-                ).findFirst().get().orElseThrow(() -> new NoSuchElementException("This cultivation realm does not exist."));
+                if (cultivator.getMaxQi() >= cultivator.getThresholdQi() && stage.getStageRankingNumber() == 7) {
+                    cultivator.rankUpRealm(event.player);
+                }
 
                 // Cultivation check & calculation
                 if (cultivator.getCultivationStatus()) {
-
+                    // TODO Replace 60 with a public static value that can be changes to speed up cultivation
+                    if (counter == 60 && cultivator.getCurrentQi() == cultivator.getMaxQi()) {
+                        counter = 0;
+                        cultivator.addMaxQi(1);
+                    }
+                    counter++;
                 }
             });
         }
