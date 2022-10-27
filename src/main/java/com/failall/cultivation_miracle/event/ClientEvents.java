@@ -24,7 +24,7 @@ public class ClientEvents {
         }
     }
 
-    // TODO INFO whether the bus has to be FORGE or MOD is determined from the event itstelf, look into the event class
+    // TODO INFO whether the bus has to be FORGE or MOD is determined from the event itself, look into the event class
     // and see which Interface(forge or mod) it implements
 
     @Mod.EventBusSubscriber(modid = CultivationMiracle.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
