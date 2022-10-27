@@ -3,9 +3,7 @@ package com.failall.cultivation_miracle;
 import com.failall.cultivation_miracle.config.ModClientConfig;
 import com.failall.cultivation_miracle.config.ModCommonConfig;
 import com.failall.cultivation_miracle.network.ModMessages;
-import com.failall.cultivation_miracle.registry.RegistryBlockEntities;
-import com.failall.cultivation_miracle.registry.RegistryBlocks;
-import com.failall.cultivation_miracle.registry.RegistryItems;
+import com.failall.cultivation_miracle.registry.*;
 import com.failall.cultivation_miracle.world.feature.ModConfiguredFeatures;
 import com.failall.cultivation_miracle.world.feature.ModPlacedFeatures;
 import com.mojang.logging.LogUtils;
@@ -38,6 +36,8 @@ public class CultivationMiracle
         RegistryBlocks.register(eventBus);
         RegistryItems.register(eventBus);
         RegistryBlockEntities.register(eventBus);
+        RegistryCultivationRealms.register(eventBus);
+        RegistryCultivationStages.register(eventBus);
         ModConfiguredFeatures.register(eventBus);
         ModPlacedFeatures.register(eventBus);
 
