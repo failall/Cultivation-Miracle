@@ -20,7 +20,9 @@ public class CultivationProvider implements ICapabilityProvider, INBTSerializabl
 
     private CultivationCapability createCultivationCapability() {
         if (this.qi == null) {
-            this.qi = new CultivationCapability(ModCommonConfig.MAX_QI_STARTING.get(), ModCommonConfig.CULTIVATION_SPEED_STARTING.get());
+            this.qi = new CultivationCapability(ModCommonConfig.MAX_QI_STARTING.get(),
+                    ModCommonConfig.CULTIVATION_SPEED_STARTING.get(),
+                    ModCommonConfig.THRESHOLD_QI_STARTING.get());
         }
         return this.qi;
     }
